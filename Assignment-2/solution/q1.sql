@@ -86,9 +86,10 @@ WHERE e.Dno IN
 -- (h) For each department that has more than or equal to 3 employees, retrieve the department 
 -- number and the number of its employees who are making more than $30,000.
 --
-SELECT e.Dno, COUNT(e.Dno)
-FROM EMPLOYEE e WHERE e.Salary > 30000
-GROUP BY e.Dno HAVING COUNT(e.Dno) >= 3;
+SELECT Dno, COUNT(Dno) FROM EMPLOYEE WHERE Salary > 30000 AND Dno IN
+(SELECT e.Dno
+FROM EMPLOYEE e
+GROUP BY e.Dno HAVING COUNT(e.Dno) >= 3) GROUP BY Dno;
 
 --
 -- Set Savepoint for the Start of Queries which modify the database.
